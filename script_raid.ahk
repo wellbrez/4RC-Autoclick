@@ -124,6 +124,7 @@ FightArena()
 GuiControlGet,nbattlesarena
 GuiControlGet,checktimearena
 GuiControlGet,Hiding
+MouseText()
 	n_battles:=nbattlesarena
     ;Go to main screen
 	adjust_screen()
@@ -293,6 +294,7 @@ FightXTimes()
 	GuiControlGet,checktime
 	GuiControlGet,Hiding
 	Gui,destroy
+	MouseText()
 	fightXtimesInRetryScreen(nbattles,checktime*1000)
 	return
 }
@@ -315,9 +317,7 @@ fightXtimesInRetryScreen(number,checktime1)
 	    
         if(color != "0x9C7B14" and counter=0)
 		{
-			msgbox,Invalid place for the start of the autoclick. Please go to the "Replay" screen
-			msgbox,%color%
-			return
+			msgbox,You are not in the "Replay" screen. Please press the Play button.
 		}
         While !(color = "0x9C7B14")
         {
