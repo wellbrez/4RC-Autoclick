@@ -35,6 +35,11 @@ f1::
 f4::
 	MouseText()
 	return
+f5::
+	mousegetpos,testx,testy
+	PixelGetColor,colortest,testx,testy
+	msgbox,%colortest%
+	return
 f12::
 	Reload
 	return
@@ -310,24 +315,18 @@ fightXtimesInRetryScreen(number,checktime1)
     While (counter<number)
     {
         adjust_screen()
-		MouseGetPos , tempx,tempy
-		mousemove,0,0
         PixelGetColor, color, 396, 547
-		mousemove,tempx,tempy
 	    
-        if(color != "0x9C7B14" and counter=0)
+        if(color != "0x9C7B14" and color != 0x967613 and counter=0)
 		{
 			msgbox,You are not in the "Replay" screen. Please press the Play button.
 		}
-        While !(color = "0x9C7B14")
+        While !(color = "0x9C7B14" or color = 0x967613)
         {
-			occult_screen()
-			sleep,checktime1
-            adjust_screen()
-			MouseGetPos , tempx,tempy
-		    mousemove,0,0
-            PixelGetColor, color, 396, 547
-			mousemove,tempx,tempy
+		occult_screen()
+		sleep,checktime1
+            	adjust_screen()
+            	PixelGetColor, color, 396, 547
         }
         counter:= counter+1
 		;MsgBox , 0, Current Campaign Running, Campaign battle number %counter%, 3
@@ -340,20 +339,14 @@ fightXtimesInRetryScreen(number,checktime1)
     }
     ;Wait for last run to be over
     adjust_screen()
-	MouseGetPos , tempx,tempy
-		mousemove,0,0
     PixelGetColor, color, 396, 547
-	mousemove,tempx,tempy
     
-    While !(color = "0x9C7B14")
+    !(color = "0x9C7B14" or color = 0x967613)
     {
 		occult_screen()
-			sleep,checktime1
-            adjust_screen()
-			MouseGetPos , tempx,tempy
-		mousemove,0,0
-            PixelGetColor, color, 396, 547
-			mousemove,tempx,tempy
+		sleep,checktime1
+            	adjust_screen()
+            	PixelGetColor, color, 396, 547
 	}
 	adjust_screen()
 	winMinimize,Raid
