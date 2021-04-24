@@ -3,12 +3,9 @@ Autoclick for Raid Shadow Legends
 
 Tutorial:
 
--Install AutoHotKey on your computer
-(Official Website: https://www.autohotkey.com/)
+-Download "script_raid.exe"
 
--Download script_raid.ahk
-
--Run the script_raid.ahk
+-Run the "script_raid.exe"
 
 -Get into an Retry Screen for a dungeon or campaign location
 
