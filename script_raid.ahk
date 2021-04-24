@@ -35,11 +35,6 @@ f1::
 f4::
 	MouseText()
 	return
-f5::
-	mousegetpos,testx,testy
-	PixelGetColor,colortest,testx,testy
-	msgbox,%colortest%
-	return
 f12::
 	Reload
 	return
@@ -273,18 +268,16 @@ MouseText()
 
 adjust_screen()
 {
-    MouseGetPos , mousebeforex,mousebeforey
 	;WinShow,Raid
 	WinActivate,Raid
 	;Resize window
 	WinMove,Raid,, 0, 0,800,600
 	WinActivate,Raid
-	sleep,1000
+	WinWaitActive,Raid
 
 }
 occult_screen()
 {
-	sleep,300
 	;WinHide,Raid
 	If(Hiding)
 	{
@@ -306,12 +299,7 @@ FightXTimes()
 
 fightXtimesInRetryScreen(number,checktime1)
 {
-	mousebeforex:=0
-	mousebeforey:=0
-    sleep,1000
     counter:=0
-    ;Run 10 times, for 50 Energy , 7Battle or 3BossBattle
-	;MsgBox , 0, Current Campaign Running, Campaign battle number %nbattles%, 3
     While (counter<number)
     {
         adjust_screen()
@@ -329,25 +317,24 @@ fightXtimesInRetryScreen(number,checktime1)
             	PixelGetColor, color, 396, 547
         }
         counter:= counter+1
-		;MsgBox , 0, Current Campaign Running, Campaign battle number %counter%, 3
+
         adjust_screen()
-		MouseGetPos , tempx,tempy
-        MouseClick,LEFT,396,547
-		mousemove,tempx,tempy
-		occult_screen()
+	ControlSend,, {r Down}, Raid
+	ControlSend,, {r Up}, Raid
+	occult_screen()
+
         sleep,checktime1
     }
     ;Wait for last run to be over
     adjust_screen()
     PixelGetColor, color, 396, 547
-    
-    !(color = "0x9C7B14" or color = 0x967613)
+    While !(color = "0x9C7B14" or color = 0x967613)
     {
 		occult_screen()
 		sleep,checktime1
             	adjust_screen()
             	PixelGetColor, color, 396, 547
-	}
+    }
 	adjust_screen()
 	winMinimize,Raid
 	WinMaximize,Raid
