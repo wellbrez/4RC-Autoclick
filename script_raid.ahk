@@ -308,6 +308,8 @@ fightXtimesInRetryScreen(number,checktime1)
         if(color != "0x9C7B14" and color != 0x967613 and counter=0)
 		{
 			msgbox,You are not in the "Replay" screen. Please press the Play button.
+			ControlSend,,{Enter Down},Raid
+			ControlSend,,{Enter Up},Raid
 		}
         While !(color = "0x9C7B14" or color = 0x967613)
         {
