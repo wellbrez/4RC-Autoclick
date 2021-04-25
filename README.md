@@ -3,7 +3,7 @@ Autoclick for Raid Shadow Legends
 
 Tutorial:
 
--Download "script_raid.exe"
+-Download "script_raid.exe" and "calibrar.png" (Put them on the same folder)
 
 -Run the "script_raid.exe"
 
